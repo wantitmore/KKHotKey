@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">KKHotKey</string>
+    <string name="power">Power</string>
+    <string name="vol_minus">Vol-</string>
+    <string name="vol_plus">Vol+</string>
+    <string name="ch_minus">Ch-</string>
+    <string name="ch_plus">Ch+</string>
+    <string name="input">input</string>
 </resources>

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.konka.kkhotkey.services.HotKeyService;
+
 public class HotKeyReceiver extends BroadcastReceiver {
 
     private final String HOT_KEY_UP = "com.konka.android.intent.action.hot.key.up";
@@ -31,6 +33,7 @@ public class HotKeyReceiver extends BroadcastReceiver {
         Log.d(TAG, "onReceive: =======  " + (mUpTime - mDownTime));
         if (mUpTime > 0 && mUpTime - mDownTime < LONG_PRESS_INTEREVAL && isUp) {
             Log.d(TAG, "onReceive: 按键短按");
+            context.startService(new Intent(context, HotKeyService.class));
         } else if (mUpTime - mDownTime >= LONG_PRESS_INTEREVAL){
             Log.d(TAG, "onReceive: 按键长按");
         }
