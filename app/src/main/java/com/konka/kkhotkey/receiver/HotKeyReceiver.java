@@ -23,6 +23,8 @@ public class HotKeyReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         String action = intent.getAction();
+        boolean needConversion = intent.getBooleanExtra("needConversion", true);
+        Log.d(TAG, "onReceive: needConversion " + needConversion);
         if (TextUtils.equals(HOT_KEY_DOWN, action) && isUp) {
             mDownTime = System.currentTimeMillis();
             isUp = false;
@@ -33,19 +35,17 @@ public class HotKeyReceiver extends BroadcastReceiver {
         Log.d(TAG, "onReceive: =======  " + (mUpTime - mDownTime));
         if (mUpTime > 0 && mUpTime - mDownTime < LONG_PRESS_INTEREVAL && isUp) {
             Log.d(TAG, "onReceive: 按键短按");
-            context.startService(new Intent(context, HotKeyService.class));
+            Intent shortPressIntent = new Intent(context, HotKeyService.class);
+            shortPressIntent.putExtra("needConversion", needConversion);
+            shortPressIntent.putExtra("isShortPress", true);
+            context.startService(shortPressIntent);
         } else if (mUpTime - mDownTime >= LONG_PRESS_INTEREVAL){
             Log.d(TAG, "onReceive: 按键长按");
+            Intent longPressIntent = new Intent(context, HotKeyService.class);
+            longPressIntent.putExtra("needConversion", needConversion);
+            longPressIntent.putExtra("isShortPress", false);
+            context.startService(longPressIntent);
         }
 
-       /* if (TextUtils.equals(HOT_KEY_LONG_PRESS, action)) {
-            mDownTime = System.currentTimeMillis();
-            isUp = false;
-            Log.d(TAG, "onReceive: 长按");
-        } else if (TextUtils.equals(HOT_KEY_DOWN, action)) {
-
-        } else if (TextUtils.equals(HOT_KEY_UP, action) && isUp) {
-            Log.d(TAG, "onReceive: 短按");
-        }*/
     }
 }

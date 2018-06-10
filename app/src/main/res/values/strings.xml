@@ -6,4 +6,6 @@
     <string name="ch_minus">Ch-</string>
     <string name="ch_plus">Ch+</string>
     <string name="input">input</string>
+    <string name="press_hold_select"><![CDATA[Press&Hold:Select]]></string>
+    <string name="press_move">Press:Move</string>
 </resources>
