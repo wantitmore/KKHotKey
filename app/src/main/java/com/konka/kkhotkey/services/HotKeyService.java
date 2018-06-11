@@ -26,7 +26,7 @@ import com.mstar.android.tv.TvCommonManager;
 public class HotKeyService extends Service {
 
     private static final String TAG  = "HotKeyService";
-    private static final String ACTION_KEYEVENT_HOTKEY = "com.konka.hotkeyservice.action.KEYDOWN";
+    public static final String ACTION_KEYEVENT_HOTKEY = "com.konka.hotkeyservice.action.KEYDOWN";
 
     private HotKeyBinder mBind = new HotKeyBinder();
     private WindowManager mWindowManager;
